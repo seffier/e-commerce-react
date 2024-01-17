@@ -1,9 +1,21 @@
-import React, {JSX} from "react";
-import {Grid, Stack, Typography, Toolbar, useTheme, IconButton, Tooltip, Box, Avatar} from "@mui/material";
+import React, {JSX, useState} from "react";
+import {
+    Grid,
+    Stack,
+    Typography,
+    Toolbar,
+    useTheme,
+    IconButton,
+    Tooltip,
+    Box,
+    Avatar,
+    Menu,
+    MenuItem
+} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import MuiAppBar from '@mui/material/AppBar'
 import Basket from "../../../ShoppingCart";
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const AppBar = styled(MuiAppBar)(({
                      theme
@@ -19,6 +31,13 @@ export const Navbar = (): JSX.Element => {
     const open = Boolean(anchorEl)
     const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
         setAnchorEl(event.currentTarget)
+    }
+    const handleClose = (): void => {
+        setAnchorEl(null)
+    }
+    const [showProfile, setShowProfile] = useState(false)
+    const changeShowProfileStatus = (newStatus: boolean): void => {
+        setShowProfile(newStatus)
     }
     const theme = useTheme()
     return (
@@ -59,11 +78,50 @@ export const Navbar = (): JSX.Element => {
                                             width: '36px', height: '36px', backgroundColor: theme.palette.common.black
                                         }}
                                     >
-                                        F
+                                        SM
                                     </Avatar>
                                 </IconButton>
                             </Tooltip>
                         </Box>
+                        <Menu
+                            anchorEl={anchorEl}
+                            id='account-menu'
+                            open={open}
+                            onClose={handleClose}
+                            onClick={handleClose}
+                            PaperProps={{
+                                elevation: 0,
+                                sx: {
+                                    paddingTop: '15px',
+                                    paddingBottom: '15px',
+                                    width: '280px',
+                                    boxShadow: '0px 0px 6px #00000029',
+                                    overflow: 'visible',
+                                    mt: 3.5,
+                                    '&:before': {
+                                        content: '""',
+                                        display: 'block',
+                                        position: 'absolute',
+                                        top: 0,
+                                        right: 10,
+                                        width: 25,
+                                        height: 25,
+                                        bgcolor: 'background.paper',
+                                        transform: 'translateY(-50%) rotate(45deg)',
+                                        zIndex: 0
+                                    }
+                                }
+                            }}
+                            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                        >
+                            <MenuItem onClick={() => setShowProfile(true)}>
+                                <Stack paddingLeft='9px' direction='row' spacing='13px'>
+                                    <AccountCircleIcon fontSize="medium" color="primary"/>
+                                    <Typography variant='body2'>Profil</Typography>
+                                </Stack>
+                            </MenuItem>
+                        </Menu>
                     </React.Fragment>
                 </Toolbar>
             </AppBar>

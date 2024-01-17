@@ -18,8 +18,8 @@ const Basket = () => {
 
     return (
         <>
-            <IconButton onClick={toggleBasketList}>
-                <Badge badgeContent={basketItems.length} color="primary">
+            <IconButton onClick={toggleBasketList} >
+                <Badge badgeContent={basketItems.length} color="warning">
                     <AddShoppingCartIcon />
                 </Badge>
             </IconButton>
