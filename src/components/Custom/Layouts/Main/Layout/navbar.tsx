@@ -2,6 +2,7 @@ import React, {JSX} from "react";
 import {Grid, Stack, Typography, Toolbar, useTheme, IconButton, Tooltip, Box, Avatar} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import MuiAppBar from '@mui/material/AppBar'
+import Basket from "../../../ShoppingCart";
 
 
 const AppBar = styled(MuiAppBar)(({
@@ -29,6 +30,9 @@ export const Navbar = (): JSX.Element => {
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                             {'App Title'}
                         </Typography>
+                            <Stack marginRight={'19px'}>
+                                <Basket />
+                            </Stack>
                         <Typography variant='body2' marginRight='19px'>
                             {'userName'}
                         </Typography>
