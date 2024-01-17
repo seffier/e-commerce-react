@@ -24,6 +24,7 @@ const TextInput = (
                 placeholder={props.inputProps?.placeholder}
                 disabled={props.inputProps?.disabled}
                 {...props.formik.getFieldProps(props.fieldName)}
+
             />
 
         </InputLayout>

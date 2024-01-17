@@ -1,7 +1,9 @@
 import {ILoginView} from "../ViewModel";
 import {JSX} from "react";
-import {Grid, InputAdornment} from "@mui/material";
+import {Grid, InputAdornment, Stack} from "@mui/material";
 import CustomInput from '../../../../components/Custom/Inputs'
+import EmailIcon from '@mui/icons-material/Email';
+import CustomButton from "../../../../components/Custom/Buttons";
 
 const LoginView =(props: ILoginView): JSX.Element => {
     return (
@@ -19,22 +21,43 @@ const LoginView =(props: ILoginView): JSX.Element => {
             component='form'
             autoComplete='off'
             onSubmit={props.formik.handleSubmit}>
-            <CustomInput.TextInput
-                formik={props.formik}
-                fieldName={'email'}
-                inputProps={{
-                    startAdornment: (
-                        <InputAdornment
-                            position='start'
-                            sx={{
-                                pb: '8px'
-                            }}
-                        >
-                        </InputAdornment>
-                    ),
-                    placeholder: 'E-Mail'
-                }}
-            />
+            <Stack
+                   spacing='30px'>
+                <CustomInput.TextInput
+                    formik={props.formik}
+                    fieldName={'email'}
+                    inputProps={{
+                        autoComplete: 'off',
+                        startAdornment: (
+                            <InputAdornment
+                                position='start'
+                                sx={{
+                                    pb: '8px'
+                                }}
+                            >
+                            <EmailIcon />
+                            </InputAdornment>
+                        ),
+                        placeholder: 'E-Mail'
+                    }}
+                />
+                <CustomInput.PasswordInput
+                    formik={props.formik}
+                    fieldName={'password'}
+                    inputProps={{
+                        placeholder: 'Password'
+                    }}
+                />
+                <CustomButton.GeneralButton
+                    xs={12}
+                    buttonProps={{
+                        type: 'submit'
+                    }}
+                >
+                    Submit
+                </CustomButton.GeneralButton>
+            </Stack>
+
         </Grid>
     )
 }
