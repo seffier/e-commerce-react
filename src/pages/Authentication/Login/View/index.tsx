@@ -54,7 +54,7 @@ const LoginView =(props: ILoginView): JSX.Element => {
                         type: 'submit'
                     }}
                 >
-                    Submit
+                    Login
                 </CustomButton.GeneralButton>
             </Stack>
 

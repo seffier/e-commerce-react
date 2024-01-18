@@ -6,6 +6,7 @@ import { LinearProgress } from '@mui/material'
 const AuthenticationLayout = React.lazy(async () => await import('../components/Custom/Layouts/Authentication/Layout'))
 const Login = React.lazy(async () => await import('../pages/Authentication/Login'))
 const MainLayout = React.lazy(async () => await import('../components/Custom/Layouts/Main/Layout'))
+const Products = React.lazy(async () => await import('../pages/Main/Products'))
 
 const getPath = (path: string): string => path
 
@@ -18,7 +19,8 @@ const routeAuth = [
 
 const routeNoAuth = [
     {
-        path: getPath(ROUTES.INDEX.PATH)
+        path: getPath(ROUTES.INDEX.PATH),
+        Component: <Products />
     }
 ]
 
@@ -34,8 +36,10 @@ const AppRoutes: React.FC = (): JSX.Element => {
                                                              </AuthenticationLayout>} />)
                     }
                     {
-                        routeNoAuth.map((route, key) => <Route key={key} path={route.path} element={<MainLayout>
-                        </MainLayout>} />)
+                        routeNoAuth.map((route, key) => <Route key={key} path={route.path}
+                                                               element={<MainLayout>
+                                                                   {route.Component}
+                                                               </MainLayout>} />)
                     }
 
                 </Routes>
