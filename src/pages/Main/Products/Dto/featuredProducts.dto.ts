@@ -4,6 +4,7 @@ export interface FeaturedProductsDto {
     imageUrl: string
     price: number
     description: string
+    quantity?: number
 }
 
 export interface AddToCartRequestDto {

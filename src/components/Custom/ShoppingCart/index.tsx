@@ -3,47 +3,90 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import Drawer from '@mui/material/Drawer';
-import {Box} from "@mui/material";
+import Box from '@mui/material/Box';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import {useBasket} from "../../../context/shoppingCartContext";
 
 const Basket = () => {
     const [isBasketOpen, setBasketOpen] = useState(false); // State to track if basket is open
+    const { basketItems, setBasketItems } = useBasket();
+
 
     // Function to handle basket icon click
     const toggleBasketList = () => {
         setBasketOpen(!isBasketOpen);
     };
 
-    // ShoppingCart items (You will replace this with actual basket data)
-    const basketItems = [1, 2];
+    // Handlers to add or remove quantity of an item
+        const handleAddQuantity = (itemId: number) => {
+            setBasketItems(basketItems.map((item) =>
+                item.quantity ? item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item : null
+            ));
+        };
+
+        const handleRemoveQuantity = (itemId: number) => {
+            setBasketItems(basketItems.map((item) =>
+                item.quantity ? item.id === itemId ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 1 } : item : null
+            ));
+        };
 
     return (
         <>
             <IconButton onClick={toggleBasketList} >
-                <Badge badgeContent={basketItems.length} color="warning">
+                <Badge badgeContent={basketItems.length} color="error">
                     <AddShoppingCartIcon />
                 </Badge>
             </IconButton>
 
-            <Drawer anchor='right' open={isBasketOpen} onClose={toggleBasketList} sx={{
-                '& .MuiDrawer-paper': {
-                    width: '20vw',
-                },
-            }}>
-                <Box
-                    sx={{
-                        width: '50vw',
-                    }}
-                >
-                    <div>
-                        {basketItems.length > 0 ? (
-                            basketItems.map((item, index) => (
-                                <div key={index}>Item {index}</div>
-                            ))
-                        ) : (
-                            <p>Your basket is empty.</p>
-                        )}
-                    </div>
-                </Box>
+            <Drawer anchor='right' open={isBasketOpen} onClose={toggleBasketList}>
+                <TableContainer component={Paper} sx={{ maxWidth: 500 }}>
+                    <Table aria-label="shopping cart table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Product</TableCell>
+                                <TableCell align="center">Quantity</TableCell>
+                                <TableCell align="right">Price</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {basketItems.length > 0 ? (
+                                basketItems.map((item) => (
+                                    <TableRow key={item.id}>
+                                        <TableCell>
+                                            <Box display="flex" alignItems="center">
+                                                <img src={item.imageUrl} alt={item.name} style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+                                                <Typography>{item.name}</Typography>
+                                            </Box>
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <IconButton onClick={() => handleRemoveQuantity(item.id)} size="small">
+                                                <RemoveIcon fontSize="small" />
+                                            </IconButton>
+                                            {item.quantity}
+                                            <IconButton onClick={() => handleAddQuantity(item.id)} size="small">
+                                                <AddIcon fontSize="small" />
+                                            </IconButton>
+                                        </TableCell>
+                                        <TableCell align="right">${item.quantity ? (item.price * item.quantity).toFixed(2) : null}</TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={3} align="center">Your basket is empty.</TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Drawer>
         </>
     );

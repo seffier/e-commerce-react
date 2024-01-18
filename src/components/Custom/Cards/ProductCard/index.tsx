@@ -1,13 +1,22 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, CardActions, Typography } from '@mui/material';
+import {Card, CardMedia, CardContent, CardActions, Typography, useTheme} from '@mui/material';
 import {FeaturedProductsDto} from "../../../../pages/Main/Products/Dto/featuredProducts.dto";
 import CustomButton from "../../Buttons";
+import {useBasket} from "../../../../context/shoppingCartContext";
+import test1 from "../../../../assets/images/test1.jpg";
 
 interface IProductCard {
     product: FeaturedProductsDto
 }
 
 const ProductCard = (props: IProductCard) => {
+    const { basketItems, setBasketItems } = useBasket();
+    const theme = useTheme()
+    const addToBasket = () => {
+        console.log('here')
+        setBasketItems([{id: 1, name: 'Product 3', imageUrl: test1, price: 19.99, quantity: 1}]);
+    };
+    console.log(basketItems)
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardMedia
@@ -30,8 +39,10 @@ const ProductCard = (props: IProductCard) => {
             <CardActions>
                 <CustomButton.GeneralButton
                     xs={6}
+                    style={{backgroundColor: theme.palette.common.white }}
                     buttonProps={{
-                        type: 'submit'
+                        type: 'submit',
+                        onClick: addToBasket
                     }}
                 >
                     Add to Cart
