@@ -16,6 +16,7 @@ import {styled} from "@mui/material/styles";
 import MuiAppBar from '@mui/material/AppBar'
 import Basket from "../../../ShoppingCart";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import {Link} from "react-router-dom";
 
 const AppBar = styled(MuiAppBar)(({
                      theme
@@ -47,7 +48,9 @@ export const Navbar = (): JSX.Element => {
                 <Toolbar>
                     <Stack direction='row' alignItems='center' justifyContent='flex-end' style={{width: '100%'}}>
                         <Typography variant="h1" component="div" sx={{flexGrow: 1}}>
-                            {'TechMarket'}
+                            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                                {'TechMarket'}
+                            </Link>
                         </Typography>
                             <Stack marginRight={'19px'}>
                                 <Basket />
