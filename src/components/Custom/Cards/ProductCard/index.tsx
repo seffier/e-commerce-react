@@ -3,12 +3,15 @@ import {Card, CardMedia, CardContent, CardActions, Typography, useTheme} from '@
 import {FeaturedProductsDto} from "../../../../pages/Main/Products/Dto/featuredProducts.dto";
 import CustomButton from "../../Buttons";
 import {useBasket} from "../../../../context/shoppingCartContext";
+import {useNavigate} from "react-router-dom";
+import {ROUTES} from "../../../../consts/routers";
 
 interface IProductCard {
     product: FeaturedProductsDto
 }
 
 const ProductCard = (props: IProductCard) => {
+    const navigate = useNavigate()
     const { basketItems, setBasketItems } = useBasket();
     const theme = useTheme()
     const addToBasket = () => {
@@ -27,12 +30,23 @@ const ProductCard = (props: IProductCard) => {
     console.log(basketItems)
     return (
         <Card sx={{ maxWidth: 345 }}>
-            <CardMedia
+            <CardActions
+                sx={{
+                    padding: 0,
+                    cursor: 'pointer', // This makes the cursor appear as a pointer when hovering over the CardActions area
+                    '&:hover': {
+                        opacity: 0.7, // This adds a hover effect to make it visually clear that the item is clickable
+                    }
+                }}
+                onClick={() => navigate(`${ROUTES.MAIN.PRODUCT_DETAIL}/${props.product.id}`)}
+            >
+                <CardMedia
                 component="img"
                 height="300"
                 image={props.product.imageUrl}
                 alt={props.product.name}
-            />
+                />
+            </CardActions>
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                     {props.product.name}

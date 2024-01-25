@@ -3,8 +3,7 @@ import Grid from '@mui/material/Grid';
 import ProductCard from "../../../../components/Custom/Cards/ProductCard";
 import {IProductsView} from "../ViewModel";
 import test1 from '../../../../assets/images/test1.jpg'
-import {List, ListItem, ListItemText, Typography} from "@mui/material";
-
+import { List, ListItem, ListItemText, Typography} from "@mui/material";
 const products = [
     // Example product data
     { id: 1, name: 'Product 1', imageUrl: test1, price: 19.99, description: 'This is product 1.', quantity: 1 },
@@ -49,7 +48,7 @@ const ProductsView = (props: IProductsView) => {
                     <Grid container spacing={4}>
                         {products.map((product) => (
                             <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-                                <ProductCard product={product} />
+                                    <ProductCard product={product} />
                             </Grid>
                         ))}
                     </Grid>
