@@ -7,6 +7,7 @@ const AuthenticationLayout = React.lazy(async () => await import('../components/
 const Login = React.lazy(async () => await import('../pages/Authentication/Login'))
 const MainLayout = React.lazy(async () => await import('../components/Custom/Layouts/Main/Layout'))
 const Products = React.lazy(async () => await import('../pages/Main/Products'))
+const ProductDetail = React.lazy( async () => await import('../pages/Main/ProductDetail'))
 
 const getPath = (path: string): string => path
 
@@ -21,6 +22,11 @@ const routeNoAuth = [
     {
         path: getPath(ROUTES.INDEX.PATH),
         Component: <Products />
+    },
+    {
+        path: getPath(ROUTES.MAIN.PRODUCT_DETAIL),
+        uniqueKey: '/:uniqueKey',
+        Component: <ProductDetail />
     }
 ]
 
@@ -36,7 +42,7 @@ const AppRoutes: React.FC = (): JSX.Element => {
                                                              </AuthenticationLayout>} />)
                     }
                     {
-                        routeNoAuth.map((route, key) => <Route key={key} path={route.path}
+                        routeNoAuth.map((route, key) => <Route key={key} path={route.path + (route.uniqueKey ?? '')}
                                                                element={<MainLayout>
                                                                    {route.Component}
                                                                </MainLayout>} />)

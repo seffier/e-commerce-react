@@ -16,7 +16,6 @@ const products = [
     { id: 7, name: 'Product 7', imageUrl: test1, price: 19.99, description: 'This is product 7.', quantity: 1 },
     { id: 8, name: 'Product 8', imageUrl: test1, price: 19.99, description: 'This is product 8.', quantity: 1 },
     { id: 9, name: 'Product 9', imageUrl: test1, price: 19.99, description: 'This is product 9.', quantity: 1 },
-    // Add more products as needed
 ]
 const categories = ['All', 'Notebooks', 'Mobile Devices', 'Headphones', 'TV', 'Games'];
 
