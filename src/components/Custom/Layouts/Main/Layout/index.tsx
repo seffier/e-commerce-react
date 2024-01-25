@@ -17,7 +17,7 @@ const MainLayout: React.FC<IProps> = (props): JSX.Element => {
                     <Stack direction={'row'}>
                         <Navbar />
                     </Stack>
-                    <Box component='main' sx={{ flexGrow: 1, p: 0, marginLeft: 20, marginTop: 20 }}>
+                    <Box component='main' sx={{ flexGrow: 1, p: 0, marginLeft: 5, marginTop: 20 }}>
                         {props.children}
                     </Box>
                 </BasketProvider>

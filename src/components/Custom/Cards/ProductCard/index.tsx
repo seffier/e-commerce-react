@@ -13,7 +13,6 @@ const ProductCard = (props: IProductCard) => {
     const { basketItems, setBasketItems } = useBasket();
     const theme = useTheme()
     const addToBasket = () => {
-        console.log('here')
         setBasketItems([{id: 1, name: 'Product 3', imageUrl: test1, price: 19.99, quantity: 1}]);
     };
     console.log(basketItems)
@@ -21,7 +20,7 @@ const ProductCard = (props: IProductCard) => {
         <Card sx={{ maxWidth: 345 }}>
             <CardMedia
                 component="img"
-                height="200"
+                height="300"
                 image={props.product.imageUrl}
                 alt={props.product.name}
             />
