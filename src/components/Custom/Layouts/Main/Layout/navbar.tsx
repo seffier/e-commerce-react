@@ -46,14 +46,14 @@ export const Navbar = (): JSX.Element => {
                     sx={{bgcolor: theme.palette.common.white}}>
                 <Toolbar>
                     <Stack direction='row' alignItems='center' justifyContent='flex-end' style={{width: '100%'}}>
-                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                            {'App Title'}
+                        <Typography variant="h1" component="div" sx={{flexGrow: 1}}>
+                            {'TechMarket'}
                         </Typography>
                             <Stack marginRight={'19px'}>
                                 <Basket />
                             </Stack>
                         <Typography variant='body2' marginRight='19px'>
-                            {'userName'}
+                            {'Sefer Memis'}
                         </Typography>
                     </Stack>
                     <React.Fragment>

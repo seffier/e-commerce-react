@@ -16,28 +16,43 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {useBasket} from "../../../context/shoppingCartContext";
 
+interface BasketItem {
+    id: number;
+    name: string;
+    imageUrl: string;
+    price: number;
+    quantity: number;
+}
+
 const Basket = () => {
     const [isBasketOpen, setBasketOpen] = useState(false); // State to track if basket is open
     const { basketItems, setBasketItems } = useBasket();
 
-
-    // Function to handle basket icon click
     const toggleBasketList = () => {
         setBasketOpen(!isBasketOpen);
     };
 
-    // Handlers to add or remove quantity of an item
-        const handleAddQuantity = (itemId: number) => {
-            setBasketItems(basketItems.map((item) =>
+    const handleAddQuantity = (itemId: number) => {
+        setBasketItems(basketItems.map((item) =>
                 item.quantity ? item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item : null
-            ));
-        };
+        ));
+    };
 
-        const handleRemoveQuantity = (itemId: number) => {
-            setBasketItems(basketItems.map((item) =>
-                item.quantity ? item.id === itemId ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 1 } : item : null
-            ));
-        };
+    const handleRemoveQuantity = (itemId: number) => {
+        setBasketItems((prevItems: BasketItem[]) =>
+            prevItems.reduce((result: BasketItem[], item: BasketItem) => {
+                if (item.id === itemId) {
+                    const newQuantity = item.quantity > 1 ? item.quantity - 1 : 0;
+                    if (newQuantity > 0) {
+                        result.push({ ...item, quantity: newQuantity });
+                    }
+                } else {
+                    result.push(item);
+                }
+                return result;
+            }, [])
+        );
+    };
 
     return (
         <>

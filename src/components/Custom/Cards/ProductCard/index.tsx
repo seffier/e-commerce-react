@@ -3,7 +3,6 @@ import {Card, CardMedia, CardContent, CardActions, Typography, useTheme} from '@
 import {FeaturedProductsDto} from "../../../../pages/Main/Products/Dto/featuredProducts.dto";
 import CustomButton from "../../Buttons";
 import {useBasket} from "../../../../context/shoppingCartContext";
-import test1 from "../../../../assets/images/test1.jpg";
 
 interface IProductCard {
     product: FeaturedProductsDto
@@ -13,7 +12,17 @@ const ProductCard = (props: IProductCard) => {
     const { basketItems, setBasketItems } = useBasket();
     const theme = useTheme()
     const addToBasket = () => {
-        setBasketItems([{id: 1, name: 'Product 3', imageUrl: test1, price: 19.99, quantity: 1}]);
+        setBasketItems(prevItems => [
+            // Add the new item on top of the previous items
+            {
+                id: props.product.id,
+                name: props.product.name,
+                imageUrl: props.product.imageUrl, // If imageUrl is specific per product, use props.product.imageUrl instead of test1
+                price: props.product.price,
+                quantity: 1
+            },
+            ...prevItems
+        ]);
     };
     console.log(basketItems)
     return (
