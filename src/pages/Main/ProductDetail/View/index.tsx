@@ -14,17 +14,27 @@ const ProductDetailView = (props: IProductDetailView) => {
     };
 
     const addToBasket = () => {
-        setBasketItems(prevItems => [
-            {
-                id: props.product.id,
-                name: props.product.name,
-                imageUrl: props.product.imageUrl[0],
-                price: props.product.price,
-                quantity: 1
-            },
-            ...prevItems
-        ]);
+        setBasketItems(prevItems => {
+            const existingItem = prevItems.find(item => item.id === props.product.id);
+            return existingItem
+                ? prevItems.map(item =>
+                    item.id === props.product.id
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                )
+                : [
+                    {
+                        id: props.product.id,
+                        name: props.product.name,
+                        imageUrl: props.product.imageUrl[0],
+                        price: props.product.price,
+                        quantity: 1
+                    },
+                    ...prevItems
+                ];
+        });
     };
+
     console.log(basketItems)
     return (
         <Grid container spacing={2} marginLeft={10} justifyContent="center">
