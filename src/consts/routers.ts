@@ -5,6 +5,7 @@ const PRODUCT_DETAIL_PATH = '/detail'
 // AUTHENTICATION
 
 const LOGIN_PATH = '/login'
+const REGISTER_PATH = '/register'
 
 export const ROUTES = {
     INDEX: { PATH: MAIN_PATH },
@@ -13,5 +14,6 @@ export const ROUTES = {
     },
     AUTHENTICATION: {
         LOGIN: { PATH: LOGIN_PATH },
+        REGISTER: { PATH: REGISTER_PATH },
     }
 }

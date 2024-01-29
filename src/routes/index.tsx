@@ -8,6 +8,7 @@ const Login = React.lazy(async () => await import('../pages/Authentication/Login
 const MainLayout = React.lazy(async () => await import('../components/Custom/Layouts/Main/Layout'))
 const Products = React.lazy(async () => await import('../pages/Main/Products'))
 const ProductDetail = React.lazy( async () => await import('../pages/Main/ProductDetail'))
+const Register = React.lazy( async () => await import('../pages/Authentication/Register'))
 
 const getPath = (path: string): string => path
 
@@ -15,6 +16,10 @@ const routeAuth = [
     {
         path: getPath(ROUTES.AUTHENTICATION.LOGIN.PATH),
         Component: <Login />
+    },
+    {
+        path: getPath(ROUTES.AUTHENTICATION.REGISTER.PATH),
+        Component: <Register />
     }
 ]
 

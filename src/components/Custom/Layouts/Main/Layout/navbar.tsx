@@ -16,7 +16,9 @@ import {styled} from "@mui/material/styles";
 import MuiAppBar from '@mui/material/AppBar'
 import Basket from "../../../ShoppingCart";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import {Link} from "react-router-dom";
+import LoginIcon from '@mui/icons-material/Login';
+import {Link, useNavigate} from "react-router-dom";
+import {ROUTES} from "../../../../../consts/routers";
 
 const AppBar = styled(MuiAppBar)(({
                      theme
@@ -28,6 +30,7 @@ const AppBar = styled(MuiAppBar)(({
 }))
 
 export const Navbar = (): JSX.Element => {
+    const navigate = useNavigate()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
     const open = Boolean(anchorEl)
     const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
@@ -63,7 +66,7 @@ export const Navbar = (): JSX.Element => {
                         <Box
                             sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}
                         >
-                            <Tooltip title='Hesap Ayarları'>
+                            <Tooltip title='Account Settings'>
                                 <IconButton
                                     onClick={handleClick}
                                     size='small'
@@ -121,7 +124,13 @@ export const Navbar = (): JSX.Element => {
                             <MenuItem onClick={() => setShowProfile(true)}>
                                 <Stack paddingLeft='9px' direction='row' spacing='13px'>
                                     <AccountCircleIcon fontSize="medium" color="primary"/>
-                                    <Typography variant='body2'>Profil</Typography>
+                                    <Typography variant='body2'>Profile</Typography>
+                                </Stack>
+                            </MenuItem>
+                            <MenuItem onClick={() => {navigate(ROUTES.AUTHENTICATION.LOGIN.PATH, { replace: true })}}>
+                                <Stack paddingLeft='9px' direction='row' spacing='13px'>
+                                    <LoginIcon fontSize="medium" color="primary"/>
+                                    <Typography variant='body2'>Login</Typography>
                                 </Stack>
                             </MenuItem>
                         </Menu>
