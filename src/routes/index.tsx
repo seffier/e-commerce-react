@@ -9,6 +9,12 @@ const MainLayout = React.lazy(async () => await import('../components/Custom/Lay
 const Products = React.lazy(async () => await import('../pages/Main/Products'))
 const ProductDetail = React.lazy( async () => await import('../pages/Main/ProductDetail'))
 const Register = React.lazy( async () => await import('../pages/Authentication/Register'))
+const DashboardLayout = React.lazy( async () => await import('../components/Custom/Layouts/Dashboard/Layout'))
+const DashboardMain = React.lazy( async () => await import('../pages/Dashboard/Main'))
+const DashboardLogin = React.lazy( async () => await import('../pages/Dashboard/Authentication/Login'))
+const DashboardRegister = React.lazy( async () => await import('../pages/Dashboard/Authentication/Register'))
+const DashboardAddProducts = React.lazy( async () => await import('../pages/Dashboard/Products/Add'))
+
 
 const getPath = (path: string): string => path
 
@@ -35,6 +41,28 @@ const routeNoAuth = [
     }
 ]
 
+const dashboardRouteAuth = [
+    {
+        path: getPath(ROUTES.DASHBOARD.AUTHENTICATION.LOGIN.PATH),
+        Component: <DashboardLogin />
+    },
+    {
+        path: getPath(ROUTES.DASHBOARD.AUTHENTICATION.REGISTER.PATH),
+        Component: <DashboardRegister />
+    },
+]
+
+const dashboardRouteNoAuth = [
+    {
+        path: getPath(ROUTES.DASHBOARD.INDEX.PATH),
+        Component: <DashboardMain />
+    },
+    {
+        path: getPath(ROUTES.DASHBOARD.PRODUCTS.ADD.PATH),
+        Component: <DashboardAddProducts />
+    }
+]
+
 const AppRoutes: React.FC = (): JSX.Element => {
     return (
         <BrowserRouter basename={process.env.REACT_APP_ROUTER_BASENAME}>
@@ -51,6 +79,18 @@ const AppRoutes: React.FC = (): JSX.Element => {
                                                                element={<MainLayout>
                                                                    {route.Component}
                                                                </MainLayout>} />)
+                    }
+                    {
+                        dashboardRouteNoAuth.map((route, key) => <Route key={key} path={route.path}
+                                                               element={<DashboardLayout>
+                                                                   {route.Component}
+                                                               </DashboardLayout>} />)
+                    }
+                    {
+                        dashboardRouteAuth.map((route, key) => <Route key={key} path={route.path}
+                                                               element={<AuthenticationLayout>
+                                                                   {route.Component}
+                                                               </AuthenticationLayout>} />)
                     }
 
                 </Routes>

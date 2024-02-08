@@ -6,4 +6,5 @@ export interface IInputProps {
     labelText?: string
     customLabelText?: boolean
     inputProps?: InputProps
+    type?: string
 }

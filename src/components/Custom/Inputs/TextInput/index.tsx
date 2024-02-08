@@ -12,7 +12,7 @@ const TextInput = (
                      customLabelText={props.customLabelText} disabled={props.inputProps?.disabled}>
             <StandardInputStyle
                 variant={'standard'}
-                type={'text'}
+                type={props.type ?? 'text'}
                 id={props.fieldName}
                 InputProps={props.inputProps}
                 name={props.fieldName}
